@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: cineverse-backend
+
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5433}/${DB_NAME:cineverse}
+    username: ${DB_USERNAME:cineverse}
+    password: ${DB_PASSWORD:cineverse_local_pw}
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+server:
+  port: ${SERVER_PORT:8080}
