@@ -8,6 +8,7 @@ spring:
     password: ${DB_PASSWORD:cineverse_local_pw}
 
   jpa:
+    open-in-view: false
     hibernate:
       ddl-auto: update
     show-sql: true

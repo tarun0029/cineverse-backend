@@ -10,9 +10,16 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.time.Duration;
 import java.time.Instant;
+import java.time.LocalDateTime;
+import java.util.Base64;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Component
 public class JwtService {
@@ -52,6 +59,20 @@ public class JwtService {
         }
     }
 
+    public LocalDateTime refreshTokenExpiry() {
+        return LocalDateTime.now().plus(Duration.ofMillis(refreshTokenExpirationMs));
+    }
+
+    public String hashToken(String token) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(token.getBytes(StandardCharsets.UTF_8));
+            return Base64.getEncoder().encodeToString(hash);
+        } catch (NoSuchAlgorithmException e) {
+            throw new IllegalStateException("SHA-256 algorithm not available", e);
+        }
+    }
+
     private String buildToken(UserPrincipal principal, long expirationMs) {
         Instant now = Instant.now();
         List<String> roles = principal.getAuthorities().stream()
@@ -59,6 +80,7 @@ public class JwtService {
                 .toList();
 
         return Jwts.builder()
+                .id(UUID.randomUUID().toString())
                 .subject(principal.getUsername())
                 .claim("userId", principal.getId())
                 .claim("roles", roles)
