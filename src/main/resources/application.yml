@@ -17,3 +17,8 @@ spring:
 
 server:
   port: ${SERVER_PORT:8080}
+
+jwt:
+  secret: ${JWT_SECRET:zTg5rDpCit8OH46ijGWJCwaBv8UsFPvlZyryBAEAVH8=}
+  access-token-expiration-ms: ${JWT_ACCESS_EXPIRATION_MS:900000}
+  refresh-token-expiration-ms: ${JWT_REFRESH_EXPIRATION_MS:604800000}
