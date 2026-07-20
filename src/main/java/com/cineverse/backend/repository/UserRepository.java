@@ -1,6 +1,8 @@
 package com.cineverse.backend.repository;
 
 import com.cineverse.backend.entity.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -14,4 +16,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     boolean existsByEmail(String email);
 
     boolean existsByMobileNumber(String mobileNumber);
+
+    @EntityGraph(attributePaths = "roles")
+    Page<User> findAll(Pageable pageable);
 }
