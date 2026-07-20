@@ -18,7 +18,7 @@ public interface BookingRepository extends JpaRepository<Booking, UUID> {
 
     Optional<Booking> findByBookingReference(String bookingReference);
 
-    Page<Booking> findByUserIdOrderByCreatedAtDesc(UUID userId, Pageable pageable);
+    Page<Booking> findByUserIdOrderByCreatedAtDesc(Integer userId, Pageable pageable);
 
     @Modifying
     @Transactional

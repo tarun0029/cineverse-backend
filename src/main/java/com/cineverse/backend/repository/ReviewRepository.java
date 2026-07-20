@@ -14,7 +14,7 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
 
     Page<Review> findByMovieId(UUID movieId, Pageable pageable);
 
-    Optional<Review> findByUserIdAndMovieId(UUID userId, UUID movieId);
+    Optional<Review> findByUserIdAndMovieId(Integer userId, UUID movieId);
 
     long countByMovieId(UUID movieId);
 

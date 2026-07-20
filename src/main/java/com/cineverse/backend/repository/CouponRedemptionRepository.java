@@ -7,7 +7,7 @@ import java.util.UUID;
 
 public interface CouponRedemptionRepository extends JpaRepository<CouponRedemption, Long> {
 
-    long countByCouponIdAndUserId(Long couponId, UUID userId);
+    long countByCouponIdAndUserId(Long couponId, Integer userId);
 
     boolean existsByCouponIdAndBookingId(Long couponId, UUID bookingId);
 }

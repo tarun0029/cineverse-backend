@@ -10,5 +10,5 @@ public interface TheatreRepository extends JpaRepository<Theatre, UUID> {
 
     List<Theatre> findByCityIdAndActiveTrue(Long cityId);
 
-    List<Theatre> findByOwnerId(UUID ownerId);
+    List<Theatre> findByOwnerId(Integer ownerId);
 }
