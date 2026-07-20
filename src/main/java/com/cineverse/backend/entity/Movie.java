@@ -86,6 +86,10 @@ public class Movie extends AuditableEntity {
     @Builder.Default
     private Long totalVotes = 0L;
 
+    @Column(name = "is_active", nullable = false)
+    @Builder.Default
+    private boolean active = true;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "movie_genres",
